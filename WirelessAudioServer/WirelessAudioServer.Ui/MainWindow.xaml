@@ -28,17 +28,25 @@
                 <ColumnDefinition Width="0"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="149*"/>
+                <RowDefinition Height="134*"/>
+                <RowDefinition Height="62*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Column="0"
                   Grid.Row="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="43*"/>
+                    <RowDefinition Height="43*"/>
+                    <RowDefinition Height="25*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            Grid.Column="0">
                     <TextBlock Text="Select Resiever"
                                Foreground="White"
                                TextAlignment="Center"/>
@@ -47,22 +55,60 @@
                               Margin="10"
                               Style="{StaticResource BlueStyle}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="1"
+                            Grid.Column="0">
                     <TextBlock Text="Input desired port"
                                Foreground="White"
                                TextAlignment="Center"/>
                     <TextBox Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}"
                              Width="100"
+                             TextAlignment="Center"
                              IsEnabled="{Binding IsEditingEnabled, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="1"
+                            Grid.Column="1">
+                    <TextBlock Text="Server Ip address is:"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                    <TextBlock Text="{Binding ServerIpAddress}"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2">
                     <TextBlock Text="{Binding ErrorText, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="Red"
                                TextWrapping="Wrap"
                                TextAlignment="Center"/>
+                    <TextBlock Text="Connected clients"
+                               Foreground="White"
+                               Margin="10,10,10,0"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
                 </StackPanel>
             </Grid>
-            <Button Grid.Row="1"
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Background="White"
+                    BorderBrush="White"
+                    CornerRadius="3"
+                    BorderThickness="2"
+                    Margin="10,0,10,0"
+                    VerticalAlignment="Stretch">
+                <ListView ItemsSource="{Binding ConnectedClients}"
+                         IsEnabled="False"
+                         Background="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Text}"
+                                   TextAlignment="Center"
+                                   Foreground="White"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+            <Button Grid.Row="2"
                     Grid.Column="0"
                     Height="30"
                     Width="100"
@@ -72,7 +118,7 @@
                     Content="Strat Streaming"
                     Command="{Binding StartStreaming}"
                     IsEnabled="{Binding IsEditingEnabled, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Grid.Row="1"
+            <Button Grid.Row="2"
                     Grid.Column="0"
                     Height="30"
                     Width="100"

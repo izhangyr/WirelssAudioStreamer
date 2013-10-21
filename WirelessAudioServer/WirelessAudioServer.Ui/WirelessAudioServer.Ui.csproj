@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>defaultIcon64.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -54,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Implementation\AudioDataSender.cs" />
+    <Compile Include="ViewModel\ListViewItemViewModel.cs" />
     <Compile Include="ViewModel\ServerViewModel.cs" />
     <Page Include="Brushes.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +126,9 @@
       <Project>{28120d29-4f6e-4c3b-ab6a-900a26420b9c}</Project>
       <Name>WindowsSoundCardWrapper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="defaultIcon64.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

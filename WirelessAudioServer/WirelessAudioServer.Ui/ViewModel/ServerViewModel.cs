@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using WirelessAudioServer.Ui.Implementation;
 using WirelessAudioServer.Wpf;
@@ -14,6 +18,7 @@ namespace WirelessAudioServer.Ui.ViewModel
     public class ServerViewModel : INotifyPropertyChanged
     {
         private readonly ObservableCollection<ComboBoxItem> _resievers = new ObservableCollection<ComboBoxItem>();
+        private readonly List<ListViewItemViewModel> _connectedClients = new List<ListViewItemViewModel>();
         private readonly Recorder _audioSoundbox = new Recorder();
         private AudioDataSender _audioDataSender;
         private ComboBoxItem _selectedReciever;
@@ -29,13 +34,18 @@ namespace WirelessAudioServer.Ui.ViewModel
         public ServerViewModel()
         {
             FillRecievers();
+            _audioDataSender = new AudioDataSender(ConnectionStateChangedCallback);
             ErrorText = "No connection, waiting for connect signal";
             IsEditingEnabled = true;
             OnPropertyChanged("IsEditingEnabled");
             OnPropertyChanged("IsStopStreamingEnabled");
         }
 
-        public ObservableCollection<ComboBoxItem> Recievers { get { return _resievers; }}
+        public ObservableCollection<ComboBoxItem> Recievers { get { return _resievers; } }
+
+        public List<ListViewItemViewModel> ConnectedClients { get { return _connectedClients; } } 
+
+        public string ServerIpAddress {get {return Dns.GetHostAddresses("").FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork).ToString();}}
 
         public bool IsEditingEnabled { get; set; }
 
@@ -105,9 +115,8 @@ namespace WirelessAudioServer.Ui.ViewModel
             IsEditingEnabled = false;
             OnPropertyChanged("IsEditingEnabled");
             OnPropertyChanged("IsStopStreamingEnabled");
-            _audioDataSender = new AudioDataSender(_port);
             _audioSoundbox.Start(_selectedReciever.Content.ToString(), SampleRate, PcmRate, ChanelsCount, BufferCount, BufferSize);
-            _audioDataSender.OpenConnection();
+            _audioDataSender.OpenConnection(_port);
             _audioSoundbox.DataRecorded += SendAudioData;
         }
         
@@ -134,6 +143,17 @@ namespace WirelessAudioServer.Ui.ViewModel
 
             ErrorText = "No connection, waiting for connect signal";
             OnPropertyChanged("ErrorText");
+        }
+
+        private void ConnectionStateChangedCallback(IEnumerable<string> connectedClients)
+        {
+            ConnectedClients.Clear();
+            foreach (var connectedClient in connectedClients)
+            {
+                ConnectedClients.Add(new ListViewItemViewModel {Text = string.Format("Client connected from IP: {0}", connectedClient)});
+            }
+
+            OnPropertyChanged("ConnectedClients");
         }
     }
 }

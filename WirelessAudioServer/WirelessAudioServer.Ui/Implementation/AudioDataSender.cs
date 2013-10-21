@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -9,20 +10,20 @@ namespace WirelessAudioServer.Ui.Implementation
     public class AudioDataSender
     {
         private readonly IPAddress _destinationAddress = Dns.GetHostAddresses("").FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork);
-        private readonly Int32 _destinationPort;
+        private readonly Action<IEnumerable<string>> _updateConnectionState;
         private Socket _audionSenderSocket;
 
-        public AudioDataSender(Int32 port)
+        public AudioDataSender(Action<IEnumerable<string>> updateConnectionState)
         {
-            _destinationPort = port;
+            _updateConnectionState = updateConnectionState;
         }
 
         public bool ConnectionEstablished { get; set; }
 
-        public void OpenConnection()
+        public void OpenConnection(Int32 port)
         {
             _audionSenderSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-            _audionSenderSocket.Bind(new IPEndPoint(_destinationAddress, _destinationPort));
+            _audionSenderSocket.Bind(new IPEndPoint(_destinationAddress, port));
             _audionSenderSocket.Listen(5);
             _audionSenderSocket.BeginAccept(Accept, _audionSenderSocket);
         }
@@ -39,6 +40,7 @@ namespace WirelessAudioServer.Ui.Implementation
                 _audionSenderSocket = (Socket) ar.AsyncState;
                 _audionSenderSocket = _audionSenderSocket.EndAccept(ar);
                 ConnectionEstablished = true;
+                _updateConnectionState(new[] { ((IPEndPoint)_audionSenderSocket.RemoteEndPoint).Address.ToString() });
             }
             catch(ObjectDisposedException)
             {}
