@@ -7,7 +7,7 @@
     <ProjectGuid>{ADBC497B-6FE1-4323-8F11-F02764F9113A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WirelessAudioServer.Application</RootNamespace>
+    <RootNamespace>WirelessAudioServer.Ui</RootNamespace>
     <AssemblyName>Server</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -92,21 +92,21 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wpf\Behaviors\Behaviors.csproj">
+    <ProjectReference Include="..\Dependencies\Behaviors\Behaviors.csproj">
       <Project>{7ea997a0-d498-4d30-93f9-ac21400b2ab3}</Project>
       <Name>Behaviors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Wpf\CustomControls\ImageBasedButton\ImageBasedButton.csproj">
+    <ProjectReference Include="..\Dependencies\CustomControls\ImageBasedButton\ImageBasedButton.csproj">
       <Project>{afd09013-a980-4622-873e-bee694ca41ca}</Project>
       <Name>ImageBasedButton</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Wpf\CustomControls\WindowBorder\WindowBorder.csproj">
+    <ProjectReference Include="..\Dependencies\CustomControls\WindowBorder\WindowBorder.csproj">
       <Project>{dcebfa16-020d-4210-9b56-2d96f7f7265d}</Project>
       <Name>WindowBorder</Name>
     </ProjectReference>
-    <ProjectReference Include="WinSound\WinSound.csproj">
+    <ProjectReference Include="..\Dependencies\WindowsSoundCardWrapper\WindowsSoundCardWrapper.csproj">
       <Project>{28120d29-4f6e-4c3b-ab6a-900a26420b9c}</Project>
-      <Name>WinSound</Name>
+      <Name>WindowsSoundCardWrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

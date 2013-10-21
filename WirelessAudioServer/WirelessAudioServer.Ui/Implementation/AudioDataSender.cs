@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace WirelessAudioServer.Application.Implementation
+namespace WirelessAudioServer.Ui.Implementation
 {
     public class AudioDataSender
     {

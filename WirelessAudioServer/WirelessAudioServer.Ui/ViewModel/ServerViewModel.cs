@@ -6,10 +6,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WirelessAudioServer.Application.Implementation;
+using WirelessAudioServer.Ui.Implementation;
 using WirelessAudioServer.Wpf;
 
-namespace WirelessAudioServer.Application.ViewModel
+namespace WirelessAudioServer.Ui.ViewModel
 {
     public class ServerViewModel : INotifyPropertyChanged
     {
