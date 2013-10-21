@@ -9,7 +9,15 @@
         AllowsTransparency="True"
         WindowStyle="None">
     <Window.Resources>
-        <viewModel:ServerViewModel x:Key="ServerViewModel"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ComboBoxBlueStyle.xaml"/>
+                <ResourceDictionary Source="GeneralOverloadedStyles.xaml"/>
+                <ResourceDictionary>
+                    <viewModel:ServerViewModel x:Key="ServerViewModel"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <control:LightWindowBorder StyleType="InstallerBorder"
                                IsCloseButtonEnabled="True"
@@ -36,7 +44,8 @@
                                TextAlignment="Center"/>
                     <ComboBox ItemsSource="{Binding Recievers, UpdateSourceTrigger=PropertyChanged}"
                               IsEnabled="{Binding IsEditingEnabled, UpdateSourceTrigger=PropertyChanged}"
-                              Margin="10"/>
+                              Margin="10"
+                              Style="{StaticResource BlueStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="Input desired port"
