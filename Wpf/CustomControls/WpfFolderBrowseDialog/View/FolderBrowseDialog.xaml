@@ -1,0 +1,96 @@
+﻿<Window x:Class="Replay.Common.Wpf.CustomControls.WpfFolderBrowseDialog.View.FolderBrowseDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:Replay.Common.Wpf.CustomControls.Border.Control;assembly=WindowBorder"
+        xmlns:resources="clr-namespace:Replay.Common.Wpf.CustomControls.WpfFolderBrowseDialog.Resources"
+        Title="{x:Static resources:Localization.FolderBrowseDialogTitle}"
+        Height="410" 
+        SizeToContent="Width"
+        WindowStyle = "None"
+        ShowInTaskbar="False"
+        AllowsTransparency ="True"
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Null}">
+    <Window.Resources>
+        <ResourceDictionary Source="..\Styles.xaml" />
+    </Window.Resources>
+    <control:LightWindowBorder StyleType="GeneralBorder"
+                               Heading="{Binding Path=Title}">
+        <Border BorderBrush="{StaticResource DefaultBackgroundBrush}"
+                BorderThickness="2"
+                Margin="5"
+                CornerRadius="3">
+        <Grid Background="{StaticResource DefaultBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding Path=TreeViewWidth}"/>
+                <ColumnDefinition Width="{Binding Path=ListViewWidth}"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="{StaticResource DarkBackgroundColor}"
+                    BorderThickness="1"
+                    Margin="10"
+                    CornerRadius="5">
+            <TreeView BorderBrush="Transparent"
+                      Background="White"
+                      ItemsSource="{Binding Path=FolderStructure, UpdateSourceTrigger=PropertyChanged}"
+                      Grid.Row="0"/>
+                </Border>
+                <Border BorderBrush="{StaticResource DarkBackgroundColor}"
+                        BorderThickness="1"
+                        Margin="10"
+                        CornerRadius="5"
+                        Grid.Row="0"
+                        Grid.Column="1">
+                    <ListView BorderBrush="Transparent"
+                              Background="White"
+                              ItemsSource="{Binding Path=FolderFiles, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+                <TextBlock Grid.Row="1"
+                       Text="{Binding Path=Error}"
+                       Height="Auto"
+                       TextAlignment="Center"
+                       Foreground="Red"
+                       Margin="10,0,10,0"/>
+            <DockPanel Grid.Row="2"
+                       Grid.ColumnSpan="2">
+                <Border Height="1"
+                        DockPanel.Dock="Top"
+                        BorderThickness="2"
+                        BorderBrush="DarkGray"
+                        Margin="10,0,10,0"
+                        VerticalAlignment="Top"/>
+                <Button MaxWidth="40"
+                        MaxHeight="20"
+                        DockPanel.Dock="Right"
+                        Content="{x:Static resources:Localization.CancelButtonText}"
+                        Command="{Binding Path=CloseCommand}"
+                        HorizontalAlignment="Right"
+                        Margin="10,0,10,0"
+                        VerticalAlignment="Center"/>
+                <Button MaxWidth="40"
+                        MaxHeight="20"
+                        DockPanel.Dock="Right"
+                        Content="{x:Static resources:Localization.OkButtonText}"
+                        Command="{Binding Path=ConfirmCommand}"
+                        IsDefault="True"
+                        Margin="10,0,10,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"/>
+                <Button MaxWidth="40"
+                        MaxHeight="20"
+                        DockPanel.Dock="Left"
+                        Visibility="{Binding Path=IsNewFolderEnabled}"
+                        Content="{x:Static resources:Localization.NewFolderButtonText}"
+                        Command="{Binding Path=NewFolderCommand}"
+                        Margin="10,0,10,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"/>
+            </DockPanel>
+        </Grid>
+        </Border>
+    </control:LightWindowBorder>
+</Window>

@@ -1,0 +1,191 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:WirelessAudioServer.Wpf.CustomControls.Control"
+                    xmlns:styleTypes="clr-namespace:WirelessAudioServer.Wpf.CustomControls.Styles">
+    <Style TargetType="{x:Type controls:ImageBasedButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ImageBasedButton}">
+                    <Grid Background="Transparent"
+                          x:Name="GeneralGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="{TemplateBinding MinWidth}" MaxWidth="{TemplateBinding MinWidth}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinWidth}" MaxHeight="{TemplateBinding MinWidth}"/>
+                        </Grid.RowDefinitions>
+                        <Border CornerRadius="{TemplateBinding CornerRadius}" 
+                                x:Name="Background"
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Width="{TemplateBinding MinWidth}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DefaultBackground}">
+                            <Image Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DefaultImage}"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   x:Name="Image"/>
+                        </Border>
+                        <Border Visibility="{TemplateBinding ContentVisibility}"
+                                Background="{TemplateBinding DefaultBackground}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{TemplateBinding ContentCornerRadius}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                x:Name="Content"
+                                HorizontalAlignment="Stretch"
+                                Grid.Column="1">
+                            <TextBlock HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Left"
+                                       x:Name="Description"
+                                       Margin="10, 0, 0, 0"
+                                       Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding FontSize}">
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Description" Property="Foreground" Value="DarkGray"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Description" Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Image" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MouseOverImage}"/>
+                            <Setter TargetName="Background" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MouseOverBackground}"/>
+                            <Setter TargetName="Content" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MouseOverBackground}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Image" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedImage}"/>
+                            <Setter TargetName="Background" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedBackground}"/>
+                            <Setter TargetName="Content" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedBackground}"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.GeneralWindowInformationButton}">
+                            <Setter Property="Margin" Value="10,10,0,10"/>
+                            <Setter Property="DefaultImage" Value="Images\Info.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\Info_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\Info_mouseover.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="Transparent"/>
+                            <Setter Property="MouseOverBackground" Value="Transparent"/>
+                            <Setter Property="PressedBackground" Value="Transparent"/>
+                            <Setter Property="Width" Value="25"/>
+                            <Setter Property="MinWidth" Value="25"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.GeneralWindowMinimizeButton}">
+                            <Setter Property="Margin" Value="10,10,0,10"/>
+                            <Setter Property="DefaultImage" Value="Images\Minimize.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\Minimize_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\Minimize_mouseover.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="Transparent"/>
+                            <Setter Property="MouseOverBackground" Value="Transparent"/>
+                            <Setter Property="PressedBackground" Value="Transparent"/>
+                            <Setter Property="Width" Value="25"/>
+                            <Setter Property="MinWidth" Value="25"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.GeneralWindowCloseButton}">
+                            <Setter Property="Margin" Value="10,10,0,10"/>
+                            <Setter Property="DefaultImage" Value="Images\Close.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\Close_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\Close_mouseover.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="Transparent"/>
+                            <Setter Property="MouseOverBackground" Value="Transparent"/>
+                            <Setter Property="PressedBackground" Value="Transparent"/>
+                            <Setter Property="Width" Value="25"/>
+                            <Setter Property="MinWidth" Value="25"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.InstallerWindowCloseButton}">
+                            <Setter Property="Margin" Value="10,0,0,0"/>
+                            <Setter Property="DefaultImage" Value="Images\close_installer.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\close_installer_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\close_installer_mouseover.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="White"/>
+                            <Setter Property="MouseOverBackground" Value="White"/>
+                            <Setter Property="PressedBackground" Value="#FFCBCDCF"/>
+                            <Setter Property="Width" Value="23"/>
+                            <Setter Property="MinWidth" Value="23"/>
+                            <Setter Property="Height" Value="19"/>
+                            <Setter Property="CornerRadius" Value="0,0,4,0"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0.5, 0, 0.5, 0.5"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.InstallerWindowMinimizeButton}">
+                            <Setter Property="Margin" Value="10,0,0,0"/>
+                            <Setter Property="DefaultImage" Value="Images\minimize_installer.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\minimize_installer_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\minimize_installer.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="White"/>
+                            <Setter Property="MouseOverBackground" Value="White"/>
+                            <Setter Property="PressedBackground" Value="#FFCBCDCF"/>
+                            <Setter Property="Width" Value="23"/>
+                            <Setter Property="MinWidth" Value="23"/>
+                            <Setter Property="Height" Value="19"/>
+                            <Setter Property="CornerRadius" Value="0,0,0,4"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0.5, 0, 0.5, 0.5"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.LightWindowCloseButton}">
+                            <Setter Property="Margin" Value="10,0,0,0"/>
+                            <Setter Property="DefaultImage" Value="Images\close_installer.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\close_installer_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\close_installer_mouseover.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="White"/>
+                            <Setter Property="MouseOverBackground" Value="White"/>
+                            <Setter Property="PressedBackground" Value="#FFCBCDCF"/>
+                            <Setter Property="Width" Value="23"/>
+                            <Setter Property="MinWidth" Value="23"/>
+                            <Setter Property="Height" Value="19"/>
+                            <Setter Property="CornerRadius" Value="0,0,4,4"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0.5, 0, 0.5, 0.5"/>
+                        </Trigger>
+                        <Trigger Property="StyleType" Value="{x:Static styleTypes:StyleTypes.MinimizedWindowRestoreButton}">
+                            <Setter Property="Margin" Value="10,10,0,10"/>
+                            <Setter Property="DefaultImage" Value="Images\Restore.png"/>
+                            <Setter Property="MouseOverImage" Value="Images\Restore_mouseover.png"/>
+                            <Setter Property="PressedImage" Value="Images\Restore_mouseover.png"/>
+                            <Setter Property="ContentVisibility" Value="Collapsed"/>
+                            <Setter Property="DefaultBackground" Value="Transparent"/>
+                            <Setter Property="MouseOverBackground" Value="Transparent"/>
+                            <Setter Property="PressedBackground" Value="Transparent"/>
+                            <Setter Property="Width" Value="25"/>
+                            <Setter Property="MinWidth" Value="25"/>
+                            <Setter Property="Height" Value="25"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="StyleType" Value="{x:Static styleTypes:StyleTypes.InstallerWindowCloseButton}"/>
+                                <Condition Property="IsEnabled" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="DefaultBackground" Value="#FFCBCDCF"/>
+                            <Setter Property="MouseOverBackground" Value="#FFCBCDCF"/>
+                            <Setter Property="PressedBackground" Value="#FFCBCDCF"/>
+                            <Setter Property="MouseOverImage" Value="Images\close_installer.png"/>
+                            <Setter Property="PressedImage" Value="Images\close_installer.png"/>
+                            <Setter Property="DefaultImage" Value="Images\close_installer.png"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

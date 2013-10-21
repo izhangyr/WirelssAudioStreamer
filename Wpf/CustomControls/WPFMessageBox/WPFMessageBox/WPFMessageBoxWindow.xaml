@@ -1,0 +1,38 @@
+﻿<Window x:Class="Replay.Common.Wpf.CustomControls.WpfMessageBox.WpfMessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:Replay.Common.Wpf.CustomControls.Border.Control;assembly=WindowBorder"
+        xmlns:wpfMessageBox="clr-namespace:Replay.Common.Wpf.CustomControls.WpfMessageBox"
+        Title="{Binding Title}" 
+        ResizeMode="NoResize" 
+        SizeToContent="WidthAndHeight" 
+        FlowDirection="{Binding TitleFlowDirection}"
+        ShowInTaskbar="False" 
+        WindowStartupLocation="CenterScreen" 
+        KeyDown="WindowKeyDown" 
+        MinWidth="300"
+        MaxWidth="460"
+        WindowStyle="None"
+        AllowsTransparency="True" 
+        Background="{x:Null}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\ReplayGrey.xaml"/>
+                <ResourceDictionary Source="Themes\GeneralOverloadedStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <control:LightWindowBorder StyleType="MessageBoxBorder"
+                               Heading="{Binding Path=Title}"
+                               Background="#636363"
+                               FontSize="14">
+        <Border Margin="5"
+                CornerRadius="2"
+                BorderThickness="2"
+                BorderBrush="#FFE6E6E6"
+                Background="#FFE6E6E6">
+                <wpfMessageBox:WpfMessageBoxControl Style="{StaticResource ReplayGreyStyle}"/>
+        </Border>
+    </control:LightWindowBorder>
+</Window>

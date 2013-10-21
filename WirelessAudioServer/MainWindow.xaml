@@ -1,0 +1,78 @@
+﻿<Window x:Class="WirelessAudioServer.Application.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control="clr-namespace:WirelessAudioServer.Wpf.CustomControls.Control;assembly=WindowBorder"
+        xmlns:viewModel="clr-namespace:WirelessAudioServer.Application.ViewModel"
+        Title="Server" 
+        Height="400" 
+        Width="320"
+        AllowsTransparency="True"
+        WindowStyle="None">
+    <Window.Resources>
+        <viewModel:ServerViewModel x:Key="ServerViewModel"/>
+    </Window.Resources>
+    <control:LightWindowBorder StyleType="InstallerBorder"
+                               IsCloseButtonEnabled="True"
+                               Heading="Server">
+        <Grid DataContext="{StaticResource ServerViewModel}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="Select Resiever"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                    <ComboBox ItemsSource="{Binding Recievers, UpdateSourceTrigger=PropertyChanged}"
+                              IsEnabled="{Binding IsEditingEnabled, UpdateSourceTrigger=PropertyChanged}"
+                              Margin="10"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Input desired port"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                    <TextBox Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}"
+                             Width="100"
+                             IsEnabled="{Binding IsEditingEnabled, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <TextBlock Text="{Binding ErrorText, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="Red"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    Height="30"
+                    Width="100"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="10,0,0,10"
+                    Content="Strat Streaming"
+                    Command="{Binding StartStreaming}"
+                    IsEnabled="{Binding IsEditingEnabled, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    Height="30"
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,10,10"
+                    Content="Stop Streaming"
+                    Command="{Binding StopStreaming}"
+                    IsEnabled="{Binding IsStopStreamingEnabled, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+    </control:LightWindowBorder>
+</Window>

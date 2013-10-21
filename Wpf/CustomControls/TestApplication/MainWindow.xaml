@@ -1,0 +1,12 @@
+﻿<Window x:Class="TestApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:control1="clr-namespace:Replay.Common.Wpf.CustomControls.Button.Control;assembly=Replay.Common.Wpf.CustomControls.Button"
+        xmlns:control2="clr-namespace:Replay.Common.Wpf.CustomControls.Border.Control;assembly=WindowBorder"
+        Title="MainWindow"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="White"
+        Height="350" 
+        Width="525">
+</Window>
