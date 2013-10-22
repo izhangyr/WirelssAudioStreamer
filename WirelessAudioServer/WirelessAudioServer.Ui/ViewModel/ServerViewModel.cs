@@ -20,13 +20,13 @@ namespace WirelessAudioServer.Ui.ViewModel
         private readonly ObservableCollection<ComboBoxItem> _resievers = new ObservableCollection<ComboBoxItem>();
         private readonly List<ListViewItemViewModel> _connectedClients = new List<ListViewItemViewModel>();
         private readonly Recorder _audioSoundbox = new Recorder();
-        private AudioDataSender _audioDataSender;
+        private readonly AudioDataSender _audioDataSender;
         private ComboBoxItem _selectedReciever;
         private int _port = 6800;
         private const int SampleRate = 44100;
         private const int ChanelsCount = 2;
         private const int PcmRate = 16;
-        private const int BufferSize = 9600;
+        private const int BufferSize = 2048;
         private const int BufferCount = 8;
 
         public event PropertyChangedEventHandler PropertyChanged;
