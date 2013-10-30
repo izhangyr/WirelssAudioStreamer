@@ -1,3 +1,19 @@
+/*
+    Copyright 2013 Roman Fortunatov
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,10 +39,10 @@ namespace WirelessAudioServer.Ui.ViewModel
         private readonly AudioDataSender _audioDataSender;
         private ComboBoxItem _selectedReciever;
         private int _port = 6800;
-        private const int SampleRate = 44100;
+        private const int SampleRate = 11025;
         private const int ChanelsCount = 2;
         private const int PcmRate = 16;
-        private const int BufferSize = 2048;
+        private const int BufferSize = 2400;
         private const int BufferCount = 8;
 
         public event PropertyChangedEventHandler PropertyChanged;

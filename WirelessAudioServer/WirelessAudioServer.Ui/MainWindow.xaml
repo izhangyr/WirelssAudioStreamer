@@ -97,14 +97,14 @@
                     BorderThickness="2"
                     Margin="10,0,10,0"
                     VerticalAlignment="Stretch">
-                <ListView ItemsSource="{Binding ConnectedClients}"
+                <ListView ItemsSource="{Binding ConnectedClients, UpdateSourceTrigger=PropertyChanged}"
                          IsEnabled="False"
                          Background="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Text}"
+                            <TextBlock Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                    TextAlignment="Center"
-                                   Foreground="White"/>
+                                   Foreground="Black"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
